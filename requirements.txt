@@ -1,0 +1,7 @@
+numpy
+pandas
+matplotlib
+django
+psycopg2-binary
+Pillow
+psutil
