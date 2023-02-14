@@ -184,7 +184,11 @@ def solve(uid, val):
         fitness = 1.0
         if res['cd'] == []:
             return fitness
-        if len(res['cd']) < 5:
+        if len(res['cd']) < 4:
+            return fitness
+
+        if any(res['cd']) < 0.0 or any(res['cl']) < 0.0:
+            logger.critical("Negative lift or drag coefficient found!")
             return fitness
 
         # replace all 0.0 values with 0.0001 in the cd list
@@ -226,8 +230,8 @@ def solve(uid, val):
         p.stdin.write(b'\n')
         p.stdin.write(b'oper\n')
         p.stdin.write(b'aseq\n')
-        p.stdin.write(b'2\n')
-        p.stdin.write(b'10\n')
+        p.stdin.write(b'0\n')
+        p.stdin.write(b'6\n')
         p.stdin.write(b'2\n')
         p.stdin.write(b'\n')
         p.stdin.write(b'!\n')
@@ -599,7 +603,7 @@ class ga():
 
         global_best_array = None
         global_best_fitness = 0.0
-        target_fitness = 583
+        target_fitness = 533.46
 
         for i in range(0, self.number_of_generations):
             logger.info(
@@ -693,7 +697,7 @@ varbound = np.random.randint(2, size=(192, 2))
 
 max_num_iteration = 20000
 chromosome_length = 192
-population_size = 101
+population_size = 5
 mutation_probability = 0.2
 crossover_probability = 0.8
 
